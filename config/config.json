@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "me",
+    "password": "password",
+    "database": "photo_caption_contest_dev",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "me",
+    "password": "password",
+    "database": "photo_caption_contest_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "me",
+    "password": "password",
+    "database": "photo_caption_contest_prod",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
