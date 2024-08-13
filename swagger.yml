@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  title: Photo Caption Contest API
+  description: API documentation for my Photo Caption Contest Portfolio project
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Local server
+paths:
+  /images:
+    get:
+      summary: Retrieve all images
+      responses:
+        '200':
+          description: List of all images
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Image'
+  /images/{id}:
+    get:
+      summary: Retrieve an image by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the image to retrieve
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: An image object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Image'
+        '404':
+          description: Image not found
+  /images/{id}/captions:
+    post:
+      summary: Add a caption to an image
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the image to add a caption to
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Caption'
+      responses:
+        '201':
+          description: Caption created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Caption'
+        '404':
+          description: Image not found
+components:
+  schemas:
+    Image:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        captions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Caption'
+    Caption:
+      type: object
+      properties:
+        id:
+          type: integer
+        caption_text:
+          type: string
+        userId:
+          type: integer
+        imageId:
+          type: integer
